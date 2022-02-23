@@ -1,6 +1,6 @@
 const express = require("express");
 const sequelize = require("../database");
-const User = require("./views/User");
+const User = require("../views/User");
 
 exports.getUsers = async (req, res, next) => {
   const users = await User.findAll();
