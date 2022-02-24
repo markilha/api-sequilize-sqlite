@@ -17,15 +17,15 @@ exports.postEntrada = async (req, res, next) => {
 };
 exports.putEntrada = async (req, res, next) => {
   const requestId = req.params.id;
-  const entradas = await Entrada.findOne({ where: { id: requestId } });
+  const entrada = await Entrada.findOne({ where: { id: requestId } });
 
-  Entrada.data = req.body.data;
-  Entrada.categoria = req.body.categoria;
-  Entrada.tipo = req.body.tipo;
-  Entrada.valor = req.body.valor;
-  Entrada.descricao = req.body.descricao;
-  await Entrada.save();
-  res.send(entradas);
+  entrada.data = req.body.data;
+  entrada.categoria = req.body.categoria;
+  entrada.tipo = req.body.tipo;
+  entrada.valor = req.body.valor;
+  entrada.descricao = req.body.descricao;
+  await entrada.save();
+  res.send(entrada);
 };
 exports.delEnt = async (req, res, next) => {
   const requestId = req.params.id;

@@ -1,6 +1,6 @@
 const express = require("express");
 const sequelize = require('./database');
-sequelize.sync({force: true}).then(()=> console.log('O banco de dados está pronto'))
+sequelize.sync({force: false}).then(()=> console.log('O banco de dados está pronto'))
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
@@ -40,7 +40,7 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(5000, () => {
-  console.log("app is running");
+  console.log("app rodando na porta: 5000" );
 });
 
 
