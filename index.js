@@ -8,6 +8,7 @@ const cors = require('cors')
 
 const rotaUsers = require("./routes/user");
 const rotaEntrada = require("./routes/entrada")
+const rotaCategoria = require("./routes/categoria")
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false })); 
@@ -23,6 +24,7 @@ app.use((req, res,next)=>{
 
 app.use("/usuario",rotaUsers);
 app.use('/entrada',rotaEntrada);
+app.use('/categoria',rotaCategoria);
 
 app.use((req, res, next) => {
   const erro = new Error("Ops! Página não encontrado...");
