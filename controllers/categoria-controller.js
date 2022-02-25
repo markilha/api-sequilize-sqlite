@@ -3,7 +3,7 @@ const sequelize = require("../database");
 const Categoria = require("../views/Categoria");
 
 exports.getCategorias = async (req, res, next) => {
-  const Categorias = await Categoria.findAll();
+  const Categorias = await Categoria.findAll({ order: [['nome', 'ASC']]});
   res.send(Categorias);
 };
 exports.getCategoriaId = async (req, res, next) => {
