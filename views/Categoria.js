@@ -5,7 +5,7 @@ class Categoria extends Model {}
 
 Categoria.init({
     nome: {
-        type: DataTypes.DATEONLY
+        type: DataTypes.STRING
     },
     tipo:{
         type: DataTypes.STRING

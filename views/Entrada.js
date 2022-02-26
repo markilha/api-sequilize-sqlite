@@ -18,6 +18,9 @@ Entrada.init({
     },
     descricao:{
         type: DataTypes.STRING
+    },
+    estatus:{
+        type: DataTypes.STRING
     }
 
 },{

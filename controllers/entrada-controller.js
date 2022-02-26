@@ -24,11 +24,12 @@ exports.putEntrada = async (req, res, next) => {
   entrada.tipo = req.body.tipo;
   entrada.valor = req.body.valor;
   entrada.descricao = req.body.descricao;
+  entrada.estatus = req.body.estatus;
   await entrada.save();
   res.send(entrada);
 };
 exports.delEnt = async (req, res, next) => {
   const requestId = req.params.id;
   const entradas = await Entrada.destroy({ where: { id: requestId } });
-  res.send("Usuário removido com sucesso");
+  res.send("Entrada removida com sucesso");
 };
