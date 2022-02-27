@@ -8,11 +8,36 @@ exports.getEntradas = async (req, res, next) => {
 };
 exports.getEntradaId = async (req, res, next) => {
   const requestId = req.params.id;
+  if(requestId === "sumdes"){
+    const entradas = await Entrada.findAll({
+      where: { tipo: 'Despesa' } ,
+      attributes: [
+        "mes","tipo",
+        [sequelize.fn("sum", sequelize.col("valor")), "soma"],
+      ],
+      group: "mes",
+      order: [['data', 'ASC']]
+    });
+    res.send(entradas)
+  }else if(requestId === "sumrec"){
+    const entradas = await Entrada.findAll({
+      where: { tipo: 'Receita' } ,
+      attributes: [
+        "mes","tipo",
+        [sequelize.fn("sum", sequelize.col("valor")), "soma"],
+      ],
+      group: "mes",
+      order: [['data', 'ASC']]
+    });
+    res.send(entradas)
+  } else{
   const entradas = await Entrada.findOne({ where: { id: requestId } });
   res.send(entradas);
+  }  
 };
 exports.postEntrada = async (req, res, next) => {
   await Entrada.create(req.body);
+  console.log(req.body)
   res.send("Entrada inserida com sucessso!");
 };
 exports.putEntrada = async (req, res, next) => {
@@ -33,3 +58,13 @@ exports.delEnt = async (req, res, next) => {
   const entradas = await Entrada.destroy({ where: { id: requestId } });
   res.send("Entrada removida com sucesso");
 };
+exports.FindGroupCategory = async(req,res,next)=>{
+  const entradas = await Entrada.findAll({
+    attributes: [
+      "categoria",
+      [sequelize.fn("COUNT", sequelize.col("id")), "count"],
+    ],
+    group: "categoria",
+  });
+  res.send(entradas)
+ }

@@ -3,7 +3,9 @@ const sequelize = require("../database");
 const Categoria = require("../views/Categoria");
 
 exports.getCategorias = async (req, res, next) => {
-  const Categorias = await Categoria.findAll({ order: [['nome', 'ASC']]});
+  const Categorias = await Categoria.findAll({
+     order: [['nome', 'ASC']]
+    });
   res.send(Categorias);
 };
 exports.getCategoriaId = async (req, res, next) => {
@@ -30,3 +32,8 @@ exports.delEnt = async (req, res, next) => {
   const Categorias = await Categoria.destroy({ where: { id: requestId } });
   res.send("Categoria removida com sucesso");
 };
+
+
+
+
+

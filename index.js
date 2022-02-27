@@ -1,30 +1,31 @@
 const express = require("express");
-const sequelize = require('./database');
-sequelize.sync({force: false}).then(()=> console.log('O banco de dados está pronto'))
+const sequelize = require("./database");
+sequelize.sync().then(()=> console.log('O banco de dados está pronto'))
+
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
-const cors = require('cors')
+const cors = require("cors");
 
 const rotaUsers = require("./routes/user");
-const rotaEntrada = require("./routes/entrada")
-const rotaCategoria = require("./routes/categoria")
+const rotaEntrada = require("./routes/entrada");
+const rotaCategoria = require("./routes/categoria");
 
 app.use(morgan("dev"));
-app.use(bodyParser.urlencoded({ extended: false })); 
-app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.use((req, res,next)=>{
-  res.header("Access-Control-Allow-Origin","*");
-  res.header("Access-Control-Allow-Headers","*");
-  res.header("Access-Control-Allow-Methods","*"); 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  res.header("Access-Control-Allow-Methods", "*");
   app.use(cors());
   next();
-})
+});
 
-app.use("/usuario",rotaUsers);
-app.use('/entrada',rotaEntrada);
-app.use('/categoria',rotaCategoria);
+app.use("/usuario", rotaUsers);
+app.use("/entrada", rotaEntrada);
+app.use("/categoria", rotaCategoria);
 
 app.use((req, res, next) => {
   const erro = new Error("Ops! Página não encontrado...");
@@ -42,14 +43,5 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(5000, () => {
-  console.log("app rodando na porta: 5000" );
+  console.log("app rodando na porta: 5000");
 });
-
-
-
-
-
-
-
-
-
