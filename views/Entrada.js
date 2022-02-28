@@ -24,7 +24,11 @@ Entrada.init({
     },
     mes:{
         type: DataTypes.STRING
+    },
+    usuario:{
+        type: DataTypes.STRING
     }
+
 },{
     sequelize,
     modelName: 'entrada',

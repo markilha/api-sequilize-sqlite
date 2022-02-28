@@ -6,9 +6,8 @@ exports.getUsers = async (req, res, next) => {
   const users = await User.findAll();
   res.send(users);
 };
-exports.getUsersId = async (req, res, next) => {
-  const requestId = req.params.id;
-  const users = await User.findOne({ where: { id: requestId } });
+exports.getUsersEmail = async (req, res, next) => { 
+  const users = await User.findOne({ where: { email: req.params.email } });
   res.send(users);
 };
 exports.postUsers = async (req, res, next) => {

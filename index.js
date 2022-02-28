@@ -7,7 +7,7 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const rotaUsers = require("./routes/user");
+const rotaUsers = require("./routes/usuario");
 const rotaEntrada = require("./routes/entrada");
 const rotaCategoria = require("./routes/categoria");
 

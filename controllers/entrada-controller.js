@@ -43,13 +43,13 @@ exports.postEntrada = async (req, res, next) => {
 exports.putEntrada = async (req, res, next) => {
   const requestId = req.params.id;
   const entrada = await Entrada.findOne({ where: { id: requestId } });
-
   entrada.data = req.body.data;
   entrada.categoria = req.body.categoria;
   entrada.tipo = req.body.tipo;
   entrada.valor = req.body.valor;
   entrada.descricao = req.body.descricao;
   entrada.estatus = req.body.estatus;
+  entrada.usuario = req.body.usuario;
   await entrada.save();
   res.send(entrada);
 };
