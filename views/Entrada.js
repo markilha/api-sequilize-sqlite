@@ -26,7 +26,7 @@ Entrada.init({
         type: DataTypes.STRING
     },
     usuario:{
-        type: DataTypes.STRING
+        type: DataTypes.INTEGER
     }
 
 },{
