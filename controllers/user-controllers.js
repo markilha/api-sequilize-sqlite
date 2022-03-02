@@ -1,28 +1,28 @@
 const express = require("express");
 const sequelize = require("../database");
-const User = require("../views/User");
+const Usuario = require("../views/Usuario");
 
 exports.getUsers = async (req, res, next) => {
-  const users = await User.findAll();
-  res.send(users);
+  const usuarios = await Usuario.findAll();
+  res.send(usuarios);
 };
 exports.getUsersEmail = async (req, res, next) => { 
-  const users = await User.findOne({ where: { email: req.params.email } });
-  res.send(users);
+  const usuarios = await Usuario.findOne({ where: { email: req.params.email } });
+  res.send(usuarios);
 };
 exports.postUsers = async (req, res, next) => {
-  await User.create(req.body);
+  await Usuario.create(req.body);
   res.send("Usuário inserido com sucessso!");
 };
 exports.puttUsers = async (req, res, next) => {
   const requestId = req.params.id;
-  const users = await User.findOne({ where: { id: requestId } });
-  users.username = req.body.username;
-  await users.save();
-  res.send(users);
+  const usuarios = await Usuario.findOne({ where: { id: requestId } });
+  Usuario.nome = req.body.nome;
+  await Usuario.save();
+  res.send(usuarios);
 };
 exports.delUsers = async (req, res, next) => {
   const requestId = req.params.id;
-  const users = await User.destroy({ where: { id: requestId } });
+  const usuarios = await Usuario.destroy({ where: { id: requestId } });
   res.send("Usuário removido com sucesso");
 };

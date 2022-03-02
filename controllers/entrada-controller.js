@@ -14,7 +14,7 @@ exports.getEntradaId = async (req, res, next) => {
 exports.getEntradaSumdes = async (req, res, next) => {
   const requestId = req.params.id;  
     const entradas = await Entrada.findAll({
-      where: { tipo: 'Despesa' } ,
+      where: { tipo: 'Despesa', usuario: req.params.id } ,
       attributes: [
         "mes","tipo",
         [sequelize.fn("sum", sequelize.col("valor")), "soma"],
@@ -27,7 +27,7 @@ exports.getEntradaSumdes = async (req, res, next) => {
 exports.getEntradaSumRec = async (req, res, next) => {
   const requestId = req.params.id;  
     const entradas = await Entrada.findAll({
-      where: { tipo: 'Receita' } ,
+      where: { tipo: 'Receita',usuario: req.params.id  } ,
       attributes: [
         "mes","tipo",
         [sequelize.fn("sum", sequelize.col("valor")), "soma"],
