@@ -13,6 +13,11 @@ exports.getCategoriaId = async (req, res, next) => {
   const Categorias = await Categoria.findOne({ where: { id: requestId } });
   res.send(Categorias);
 };
+exports.getTipoId = async (req, res, next) => {
+
+  const Categorias = await Categoria.findOne({ where: { nome:  req.params.nome} });
+  res.send(Categorias);
+};
 exports.postCategoria = async (req, res, next) => {
   await Categoria.create(req.body);
   res.send("Categoria inserida com sucessso!");
