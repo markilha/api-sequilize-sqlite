@@ -2,45 +2,47 @@ const express = require("express");
 const sequelize = require("../database");
 const Entrada = require("../views/Entrada");
 
-exports.getEntradas = async (req, res, next) => {    
-  const entradas = await Entrada.findAll({where : {usuario: req.params.id}});
+exports.getEntradas = async (req, res, next) => {
+  const entradas = await Entrada.findAll({ where: { usuario: req.params.id } });
   res.send(entradas);
 };
 exports.getEntradaId = async (req, res, next) => {
-  const requestId = req.params.id; 
+  const requestId = req.params.id;
   const entradas = await Entrada.findOne({ where: { id: requestId } });
-  res.send(entradas);  
+  res.send(entradas);
 };
 exports.getEntradaSumdes = async (req, res, next) => {
-  const requestId = req.params.id;  
-    const entradas = await Entrada.findAll({
-      where: { tipo: 'Despesa', usuario: req.params.id } ,
-      attributes: [
-        "mes","tipo",
-        [sequelize.fn("sum", sequelize.col("valor")), "soma"],
-      ],
-      group: "mes",
-      order: [['data', 'ASC']]
-    });
-    res.send(entradas) 
+  const requestId = req.params.id;
+  const entradas = await Entrada.findAll({
+    where: { tipo: "Despesa", usuario: req.params.id },
+    attributes: [
+      "mes",
+      "tipo",
+      [sequelize.fn("sum", sequelize.col("valor")), "soma"],
+    ],
+    group: "mes",
+    order: [["data", "ASC"]],
+  });
+  res.send(entradas);
 };
 exports.getEntradaSumRec = async (req, res, next) => {
-  const requestId = req.params.id;  
-    const entradas = await Entrada.findAll({
-      where: { tipo: 'Receita',usuario: req.params.id  } ,
-      attributes: [
-        "mes","tipo",
-        [sequelize.fn("sum", sequelize.col("valor")), "soma"],
-      ],
-      group: "mes",
-      order: [['data', 'ASC']]
-    });
-    res.send(entradas) 
+  const requestId = req.params.id;
+  const entradas = await Entrada.findAll({
+    where: { tipo: "Receita", usuario: req.params.id },
+    attributes: [
+      "mes",
+      "tipo",
+      [sequelize.fn("sum", sequelize.col("valor")), "soma"],
+    ],
+    group: "mes",
+    order: [["data", "ASC"]],
+  });
+  res.send(entradas);
 };
 exports.postEntrada = async (req, res, next) => {
-  console.log(`DADOS: ${req.body}`)
-  await Entrada.create(req.body);  
- res.send("Entrada inserida com sucessso!");
+  console.log(`DADOS: ${req.body}`);
+  await Entrada.create(req.body);
+  res.send("Entrada inserida com sucessso!");
 };
 exports.putEntrada = async (req, res, next) => {
   const requestId = req.params.id;
@@ -60,13 +62,15 @@ exports.delEnt = async (req, res, next) => {
   const entradas = await Entrada.destroy({ where: { id: requestId } });
   res.send("Entrada removida com sucesso");
 };
-exports.FindGroupCategory = async(req,res,next)=>{
+exports.getContCat = async (req, res, next) => {  
   const entradas = await Entrada.findAll({
     attributes: [
       "categoria",
-      [sequelize.fn("COUNT", sequelize.col("id")), "count"],
+      [sequelize.fn("count", sequelize.col("id")), "count"],
     ],
     group: "categoria",
+    order: [["categoria", "ASC"]],
   });
-  res.send(entradas)
- }
+  res.send(entradas);
+  console.log(entradas)
+};
