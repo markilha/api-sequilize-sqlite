@@ -64,9 +64,10 @@ exports.delEnt = async (req, res, next) => {
 };
 exports.getContCat = async (req, res, next) => {  
   const entradas = await Entrada.findAll({
+    where: { tipo: "Despesa", usuario: req.params.id },
     attributes: [
-      "categoria",
-      [sequelize.fn("count", sequelize.col("id")), "count"],
+      "data","categoria",
+      [sequelize.fn("sum", sequelize.col("id")), "soma"],
     ],
     group: "categoria",
     order: [["categoria", "ASC"]],

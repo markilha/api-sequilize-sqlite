@@ -6,7 +6,7 @@ router.get("/:id",EntradaController.getEntradas)
 router.get("/:id",EntradaController.getEntradaId)
 router.get("/sumdes/:id",EntradaController.getEntradaSumdes)
 router.get("/sumrec/:id",EntradaController.getEntradaSumRec)
-router.get("/contcat",EntradaController.getContCat)
+router.get("/:id/concat",EntradaController.getContCat)
 router.post("/",EntradaController.postEntrada)
 
 router.put("/:id",EntradaController.putEntrada)
