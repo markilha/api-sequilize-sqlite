@@ -67,7 +67,7 @@ exports.getContCat = async (req, res, next) => {
     where: { tipo: "Despesa", usuario: req.params.id },
     attributes: [
       "data","categoria",
-      [sequelize.fn("sum", sequelize.col("id")), "soma"],
+      [sequelize.fn("sum", sequelize.col("valor")), "soma"],
     ],
     group: "categoria",
     order: [["categoria", "ASC"]],
